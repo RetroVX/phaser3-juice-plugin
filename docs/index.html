@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser Juice</title>
+
+	<link type="text/css" rel="stylesheet" href="assets/main.min.css">
+
+	<script type="text/javascript" src="lib/phaser.min.js"></script>
+	<script src="game.js" type="module"></script>
+
+
+</head>
+
+<body>
+<div class="container">
+	<div id="wrapper">
+	
+		<div id="left">
+			<div id="gameCanvas"></div>
+			<p id="code">Code Example</p>
+			<p style="text-align: center">Install:</p>
+			<p style="font-size: 1.1vw">import phaserJuice from "./path/to/phaserJuice.min.js";</p>
+			<p>let juice = new phaserJuice(this);</p>
+			<a id="link" href="https://github.com/RetroVX">Made By RetroVX</a>
+			<a id="link" href="https://phaser.io">With Phaser</a>
+
+		</div>
+		<div id="right">
+			<h1>Phaser Juice</h1>
+			<p>A simple class to create juicy effects for sprites with Phaser 3</p>
+			<p>For more info and to download: <a href="https://github.com/RetroVX/phaser3Juice">Github</a></p>
+			<p>Docs: <a href="out/phaserJuice.html">phaserJuice docs</a></p>
+			<br>
+			<ul>
+				<li><button id="shakeBtn">Shake</button></li>
+				<li><button id="shakeYBtn">Shake_Y</button></li>
+				<li><button id="wobbleBtn">Wobble</button></li>
+				<li><button id="wobbleYBtn">Wobble_Y</button></li>
+				<li><button id="flashBtn">Flash</button></li>
+				<li><button id="growBtn">Scale Up</button></li>
+				<li><button id="shrinkBtn">Scale Down</button></li>
+				<li><button id="pulseBtn">Pulse</button></li>
+				<li><button id="fadeInBtn">Fade In</button></li>
+				<li><button id="fadeOutBtn">Fade Out</button></li>
+				<li><button id="fadeInOutBtn">Fade In_Out</button></li>
+				<li><button id="rotateBtn">Rotate</button></li>
+				<li><button id="bounceBtn">Bounce</button></li>
+				<li><button id="dmgBtn">Damage</button></li>
+				<li><button id="resetBtn">Reset</button></li>
+				<li><hr></li>
+				<p>Experimental:</p>
+				<li><button id="flipXBtn">FlipX</button></li>
+				<li><button id="flipYBtn">FlipY</button></li>
+				<li><button id="spinXBtn">SpinX</button></li>
+				<li><button id="spinYBtn">SpinY</button></li>
+				<li><p>
+					These effects scale the image to create the flip/spin.
+					So they can mess with your sprites scale properties, be careful!
+				</p></li>
+			</ul>
+			
+		</div>
+	</div>
+</body>
+
+</html>
