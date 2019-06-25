@@ -1,48 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Source: phaserJuice.js</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Source: phaserJuice.js</h1>
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @author Conor Irwin &lt;https://github.com/RetroVX> 
+/**
+ * @author Conor Irwin <https://github.com/RetroVX> 
  * @license {@link http://opensource.org/licenses/MIT|MIT License}
  * @classdesc 
- * GitHub: https://github.com/retroVX/phaser3Juice &lt;br>
+ * GitHub: https://github.com/retroVX/phaser3Juice <br>
  * Create juice effects with Phaser 3
  * @example 
- * this.juice = new phaserJuice(this);
  * this.juice.shake(target);
  * @version: 1.1.0
  * @class phaserJuice
+ * @extends Phaser.Plugins.ScenePlugin
  * @param {Phaser.Scene} scene - The Scene the phaserJuice will be created in (this)
+ * @param {Phaser.pluginManager} pluginManager - Phaser plugin manager
  */
 
-export default class phaserJuice {
+export default class phaserJuice extends Phaser.Plugins.ScenePlugin {
 
-    constructor(scene) {
+    constructor(scene, pluginManager) {
+
+        super(scene, pluginManager);
 
         /**
          * Get 'this' from scene
@@ -55,11 +30,11 @@ export default class phaserJuice {
 
          
         /**
-         * Tween options that can be overidden depending on effect settings. &lt;br>
+         * Tween options that can be overidden depending on effect settings. <br>
          * Every tweenable effect has access to the delay, paused, onStart and onComplete parameters.
          * Depending on which parameters the effect uses, you can edit each effect using the optional
-         * config parameter inside each effect. &lt;br>
-         * For example. To edit the shake effect to shake left and right instead of up and down &lt;br>
+         * config parameter inside each effect. <br>
+         * For example. To edit the shake effect to shake left and right instead of up and down <br>
          * .shake(sprite, {
          *     x: 5,
          *     y: 0
@@ -109,6 +84,21 @@ export default class phaserJuice {
 
 
     /**
+     * boot function for plugin, setup event handlers
+     */
+
+    boot() {
+        const eventEmitter = this.systems.events;
+        eventEmitter.once('destroy', function(){
+            // remove everything
+            this.scene = null;
+            this.options = null;
+
+        }, this);
+    }
+
+
+    /**
     * @method phaserJuice.add
     * @type {function}
     * @param {object} target - sprite to chain
@@ -124,8 +114,8 @@ export default class phaserJuice {
 
 
     /**
-     * Shake a sprite &lt;br>
-     * The shake default config and options to overide if using the config parameter &lt;br>
+     * Shake a sprite <br>
+     * The shake default config and options to overide if using the config parameter <br>
      * const shakeConfig = {
      *       x: 5,
      *       y: 0,
@@ -213,8 +203,8 @@ export default class phaserJuice {
 
 
     /**
-     * Add a slight wobble to a sprite &lt;br>
-     * The wobble default config and options to overide if using the config parameter &lt;br>
+     * Add a slight wobble to a sprite <br>
+     * The wobble default config and options to overide if using the config parameter <br>
      * const wobbleConfig = {
      *       x: 20,
      *       y: 0,
@@ -304,8 +294,8 @@ export default class phaserJuice {
 
 
     /**
-     * Scale up a sprite &lt;br>
-     * The scaleUp default config and options to overide if using the config parameter &lt;br>
+     * Scale up a sprite <br>
+     * The scaleUp default config and options to overide if using the config parameter <br>
      * const growConfig = {
      *      scaleX: target.scaleX + 0.25,
      *      scaleY: target.scaleY + 0.25,
@@ -366,8 +356,8 @@ export default class phaserJuice {
 
 
     /**
-     * Scale down a sprite &lt;br>
-     * The scaleDown default config and options to overide if using the config parameter &lt;br>
+     * Scale down a sprite <br>
+     * The scaleDown default config and options to overide if using the config parameter <br>
      * const shrinkConfig = {
      *      scaleX: target.scaleX - 0.25,
      *      scaleY: target.scaleY - 0.25,
@@ -428,8 +418,8 @@ export default class phaserJuice {
 
 
     /**
-     * Pulse a sprite &lt;br>
-     * The pulse default config and options to overide if using the config parameter &lt;br>
+     * Pulse a sprite <br>
+     * The pulse default config and options to overide if using the config parameter <br>
      * const pulseConfig = {
      *      scaleX: target.scaleX * 1.25,
      *      scaleY: target.scaleY * 1.25,
@@ -498,7 +488,7 @@ export default class phaserJuice {
 
     
     /**
-     * Flash a sprite &lt;br>
+     * Flash a sprite <br>
      * Note: Flash does not use a tween
      * @method phaserJuice.flash
      * @type {function}
@@ -528,8 +518,8 @@ export default class phaserJuice {
 
 
     /**
-     * Rotate a sprite &lt;br>
-     * The rotate default config and options to overide if using the config parameter &lt;br>
+     * Rotate a sprite <br>
+     * The rotate default config and options to overide if using the config parameter <br>
      * const rotateConfig = {
      *      angle: 360,
      *      duration: 500,
@@ -591,8 +581,8 @@ export default class phaserJuice {
 
 
     /**
-     * Bounce a sprite &lt;br>
-     * The bounce default config and options to overide if using the config parameter &lt;br>
+     * Bounce a sprite <br>
+     * The bounce default config and options to overide if using the config parameter <br>
      * const bounceConfig = {
      *      y: 25,
      *      duration: 1000,
@@ -653,8 +643,8 @@ export default class phaserJuice {
 
 
     /**
-     * Fade in a sprite &lt;br>
-     * The fade in default config and options to overide if using the config parameter &lt;br>
+     * Fade in a sprite <br>
+     * The fade in default config and options to overide if using the config parameter <br>
      * const fadeInConfig = {
      *      alpha: 1,
      *      duration: 750,
@@ -714,8 +704,8 @@ export default class phaserJuice {
 
 
     /**
-     * Fade out a sprite &lt;br>
-     * The fade out default config and options to overide if using the config parameter &lt;br>
+     * Fade out a sprite <br>
+     * The fade out default config and options to overide if using the config parameter <br>
      * const fadeOutConfig = {
      *      alpha: 0,
      *      duration: 750,
@@ -775,8 +765,8 @@ export default class phaserJuice {
 
 
     /**
-     * Fade in and out a sprite &lt;br>
-     * The fade in &amp; out default config and options to overide if using the config parameter &lt;br>
+     * Fade in and out a sprite <br>
+     * The fade in & out default config and options to overide if using the config parameter <br>
      * const fadeInOutConfig = {
      *      alpha: 0,
      *      duration: 500,
@@ -842,9 +832,9 @@ export default class phaserJuice {
 
 
     /**
-     * Flip a sprite on the x-axis &lt;br>
-     * The flipX default config and options to overide if using the config parameter &lt;br>
-     * Warning: This effect scales the sprite and can cause unintended side effects! &lt;br>
+     * Flip a sprite on the x-axis <br>
+     * The flipX default config and options to overide if using the config parameter <br>
+     * Warning: This effect scales the sprite and can cause unintended side effects! <br>
      * const flipXConfig = {
      *      scaleX: direction,
      *      duration: 500,
@@ -913,9 +903,9 @@ export default class phaserJuice {
 
 
     /**
-     * Flip a sprite on the y-axis &lt;br>
-     * The flipY default config and options to overide if using the config parameter &lt;br>
-     * Warning: This effect scales the sprite and can cause unintended side effects! &lt;br>
+     * Flip a sprite on the y-axis <br>
+     * The flipY default config and options to overide if using the config parameter <br>
+     * Warning: This effect scales the sprite and can cause unintended side effects! <br>
      * const flipYConfig = {
      *      scaleY: direction,
      *      duration: 500,
@@ -984,9 +974,9 @@ export default class phaserJuice {
 
 
     /**
-     * Spin a sprite on the x-axis &lt;br>
-     * The spinX default config and options to overide if using the config parameter &lt;br>
-     * Warning: This effect scales the sprite and can cause unintended side effects! &lt;br>
+     * Spin a sprite on the x-axis <br>
+     * The spinX default config and options to overide if using the config parameter <br>
+     * Warning: This effect scales the sprite and can cause unintended side effects! <br>
      * const spinXConfig = {
      *      scaleX: direction,
      *      duration: 500,
@@ -1062,8 +1052,8 @@ export default class phaserJuice {
 
     /**
      * Spin a sprite on the y-axis
-     * The spinY default config and options to overide if using the config parameter &lt;br>
-     * Warning: This effect scales the sprite and can cause unintended side effects! &lt;br>
+     * The spinY default config and options to overide if using the config parameter <br>
+     * Warning: This effect scales the sprite and can cause unintended side effects! <br>
      * const spinYConfig = {
      *      scaleY: direction,
      *      duration: 500,
@@ -1139,7 +1129,7 @@ export default class phaserJuice {
 
 
     /**
-     * Helper function to reset a sprite back to original &lt;br>
+     * Helper function to reset a sprite back to original <br>
      * Resets the sprite to alpha 1, scale 1, angle 0, tint none 
      * @method phaserJuice.reset
      * @type {function}
@@ -1161,26 +1151,4 @@ export default class phaserJuice {
 
     }
 
-}</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="phaserJuice.html">phaserJuice</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jun 25 2019 20:19:32 GMT+0100 (British Summer Time)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
-</body>
-</html>
+}

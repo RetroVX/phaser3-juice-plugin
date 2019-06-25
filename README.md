@@ -1,6 +1,6 @@
 # Phaser 3 Juice
 
-A class to create customizable juicy effects for sprites with Phaser 3
+A plugin to create customizable juicy effects for sprites with Phaser 3
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -40,6 +40,7 @@ git clone https://github.com/RetroVX/phaser3Juice.git
 Or download from Zip
 
 #### Import into a Phaser scene
+Use ```phaserJuice.js``` or ```phaserJuice.min.js```
 
 ```javascript
 import phaserJuice from "./path/to/phaserJuice.min.js";
@@ -47,6 +48,32 @@ import phaserJuice from "./path/to/phaserJuice.min.js";
 // pass scene instance
 const juice = new phaserJuice(this);
 
+```
+
+#### Install As Global Scene Plugin
+Use ```phaserJuicePlugin.js``` or ```phaserJuicePlugin.min.js```
+
+```javascript
+import phaserJuice from ".path/to/phaserJuicePlugin.min.js";
+
+const config = {
+  type: Phaser.AUTO,
+  width: 480,
+  height: 400,
+  parent: "gameCanvas",
+  plugins: {
+    scene: [
+        { key: 'phaserJuice', plugin: phaserJuice, mapping: 'juice' }
+    ]
+  },
+  scene: basicScene,
+
+};
+
+const game = new Phaser.Game(config);
+
+// you can now access the plugin in any scene using
+this.juice
 ```
 
 ### Basic Examples
@@ -234,7 +261,6 @@ So they can mess with your sprites scale properties, be careful!
 
 
 ### Todo
-- Convert to a Phaser plugin
 - Convert to more es5 friendly code for compatibility 
 
 ## Made With [Phaser.io](https://phaser.io)

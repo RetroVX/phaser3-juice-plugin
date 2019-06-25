@@ -1,5 +1,12 @@
 # phaserjuice Changelog
 
+### VERSION 1.1.1
+
+Created the global scene plugin
+
+* phaserJuicePlugin created
+* updated docs and README.md
+
 ### VERSION 1.1.0
 
 * Functions are now chainable
