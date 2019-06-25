@@ -21,6 +21,7 @@ A class to create customizable juicy effects for sprites with Phaser 3
 * SpinX
 * SpinY
 * Reset
+* Chainable
 * Plug in and play approach
 * Customize each effect
 
@@ -116,6 +117,17 @@ juice.spinY(target);
 
 // reset
 juice.reset(target);
+
+// add
+juice.add(target);
+```
+
+#### Chain Effects
+```javascript
+// chain the effects using .add(sprite)
+juice.add(sprite)
+.shake()
+.fadeInOut();
 ```
 
 #### ShakeY & WobbleY
@@ -147,14 +159,6 @@ juice.wobble(target, {x:35});
 juice.shake(target, null, true);
 ```
 
-#### Get Effects Config
-```javascript
-// Each tweenable effect returns an object with the tween and the default effects config
-let shake = juice.shake(target);
-console.log(shake);
-// -- {tween: the tween object, config: the default config}
-```
-
 #### Start Effect Paused or Delay Effect
 ```javascript
 // if the effect is created via a tween then you can start the tween paused or delay it starting
@@ -166,7 +170,16 @@ let shake = juice.shake(target, {
 })
 
 // play effect
-shake.tween.play();
+shake.shakeTween.play();
+// or
+juice.shakeTween.play();
+
+// If the effect is tweenable then the tween can be accessed by juice.{effectName}Tween
+// examples
+juice.shakeTween
+juice.wobbleTween
+juice.fadeInTween
+juice.scaleUpTween
 ```
 
 #### onStart and onComplete
@@ -205,9 +218,8 @@ juice.pulse(target, {
 ```javascript
 // shake and flash the tween to represent the player taking damage
 let sprite = this.add.sprite(100, 100, 'player');
-juice.shake(sprite);
-// flash defaults to a white flash
-juice.flash(sprite);
+// chain
+juice.add(sprite).shake().flash();
 
 // flash red instead
 juice.flash(sprite, null, '0xff0000');

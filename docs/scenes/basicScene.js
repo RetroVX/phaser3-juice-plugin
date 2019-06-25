@@ -16,8 +16,13 @@ export default class basicScene extends Phaser.Scene {
         const cam = this.cameras.main;
 
         const juice = new phaserJuice(this);
-      
+
         let player = this.add.sprite(240, 200, 'player');
+        player.setAlpha(0);
+
+        juice.add(player)
+        .shake()
+        .fadeIn(null, {duration: 1500});
 
         // display code
         const code = document.getElementById('code');
@@ -136,9 +141,8 @@ export default class basicScene extends Phaser.Scene {
             code.textContent = 'juice.bounce(sprite);'
         });
         const damage = document.getElementById('dmgBtn').addEventListener('click', function(e) {
-            juice.shake(player);
-            juice.flash(player);
-            code.textContent = 'juice.shake(sprite); juice.flash(sprite);'
+            juice.add(player).shake().flash();
+            code.textContent = 'juice.add(sprite)\n.shake()\n.flash();'
         });
 
     }

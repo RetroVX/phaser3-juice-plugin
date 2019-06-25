@@ -7,7 +7,7 @@
  * @example 
  * this.juice = new phaserJuice(this);
  * this.juice.shake(target);
- * @version: 1.0.0
+ * @version: 1.1.0
  * @class phaserJuice
  * @param {Phaser.Scene} scene - The Scene the phaserJuice will be created in (this)
  */
@@ -81,6 +81,21 @@ export default class phaserJuice {
 
 
     /**
+    * @method phaserJuice.add
+    * @type {function}
+    * @param {object} target - sprite to chain
+    * @return {function} for method chaining
+    * @since 1.1.0 
+    */
+
+    add(target) {
+        this.target = target;
+
+        return this;
+    }
+
+
+    /**
      * Shake a sprite <br>
      * The shake default config and options to overide if using the config parameter <br>
      * const shakeConfig = {
@@ -98,13 +113,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to shake
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the shake tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     shake(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const shakeConfig = {
@@ -119,7 +135,7 @@ export default class phaserJuice {
         }
 
         let options = this.options(shakeConfig, config);
-        let shake = scene.tweens.add({
+        this.shakeTween = scene.tweens.add({
             targets: target,
             x: target.x + options.x,
             y: target.y - options.y,
@@ -143,7 +159,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: shake, config: shakeConfig};
+        return this;
     }
 
 
@@ -152,11 +168,14 @@ export default class phaserJuice {
      * @method phaserJuice.shakeY
      * @type {function}
      * @param {object} target - sprite to shake
-     * @return {object} Return an object with the shake tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     shakeY(target) {
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
+
         const config = {
             x: 0,
             y: 5
@@ -183,13 +202,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to wobble
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the wobble tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     wobble(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const wobbleConfig = {
@@ -205,7 +225,7 @@ export default class phaserJuice {
 
         let options = this.options(wobbleConfig, config);
 
-        let wobble = scene.tweens.add({
+        this.wobbleTween = scene.tweens.add({
             targets: target,
             x: target.x + options.x,
             y: target.y + options.y,
@@ -229,7 +249,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: wobble, config: wobbleConfig};
+        return this;
 
     }
 
@@ -239,11 +259,14 @@ export default class phaserJuice {
      * @method phaserJuice.wobbleY
      * @type {function}
      * @param {object} target - sprite to wobble
-     * @return {object} Return an object with the wobble tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     wobbleY(target) {
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
+
         const config = {
             x: 0,
             y: 20
@@ -267,13 +290,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to grow
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the scaleUp tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     scaleUp(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const growConfig = {
@@ -286,7 +310,7 @@ export default class phaserJuice {
 
         let options = this.options(growConfig, config);
 
-        let grow = scene.tweens.add({
+        this.scaleUpTween = scene.tweens.add({
             targets: target,
             scaleX: options.scaleX,
             scaleY: options.scaleY,
@@ -308,7 +332,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: grow, config: growConfig};
+        return this;
 
     }
 
@@ -328,13 +352,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to shrink
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the scaleDown tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     scaleDown(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const shrinkConfig = {
@@ -347,7 +372,7 @@ export default class phaserJuice {
 
         let options = this.options(shrinkConfig, config);
      
-        let shrink = scene.tweens.add({
+        this.scaleDown = scene.tweens.add({
             targets: target,
             scaleX: options.scaleX,
             scaleY: options.scaleY,
@@ -369,7 +394,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: shrink, config: shrinkConfig};
+        return this;
 
     }
 
@@ -392,13 +417,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to pulse
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the pulse tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     pulse(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const pulseConfig = {
@@ -414,7 +440,7 @@ export default class phaserJuice {
 
         let options = this.options(pulseConfig, config);
 
-        let pulse = scene.tweens.add({
+        this.pulseTween = scene.tweens.add({
             targets: target,
             scaleX: options.scaleX,
             scaleY: options.scaleY,
@@ -438,7 +464,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: pulse, config: pulseConfig};
+        return this;
 
     }
 
@@ -451,12 +477,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to flash
      * @param {number} [duration=150] - how long the effect lasts for. 
      * @param {string} [color='0xffffff'] - The color the sprite flashes.
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     flash(target, duration, color) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(duration === undefined || duration === null) {duration = 150;}
         if(color === undefined || color === null) {color = '0xffffff';}
 
@@ -465,6 +493,8 @@ export default class phaserJuice {
         let flashTimer = scene.time.addEvent({delay: duration, callback: function(){
             target.setTint('0xffffff');
         }, callbackScope: this});
+
+        return this;
 
     }
 
@@ -484,13 +514,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to rotate
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the rotate tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     rotate(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const rotateConfig = {
@@ -503,7 +534,7 @@ export default class phaserJuice {
 
         let options = this.options(rotateConfig, config);
 
-        let rotate = scene.tweens.add({
+        this.rotateTween = scene.tweens.add({
             targets: target,
             angle: options.angle,
             yoyo: options.yoyo,
@@ -526,7 +557,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: rotate, config: rotateConfig};
+        return this;
 
     }
 
@@ -546,13 +577,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to bounce
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the bounce tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     bounce(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const bounceConfig = {
@@ -565,7 +597,7 @@ export default class phaserJuice {
 
         let options = this.options(bounceConfig, config);
 
-        let bounce = scene.tweens.add({
+        this.bounceTween = scene.tweens.add({
             targets: target,
             y: target.y + options.y,
             repeat: options.repeat,
@@ -587,7 +619,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: bounce, config: bounceConfig};
+        return this;
 
     }
 
@@ -607,13 +639,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to fade in
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the fadeIn tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     fadeIn(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const fadeInConfig = {
@@ -626,7 +659,7 @@ export default class phaserJuice {
 
         let options = this.options(fadeInConfig, config);
 
-        let fadeIn = scene.tweens.add({
+        this.fadeInTween = scene.tweens.add({
             targets: target,
             alpha: options.alpha,
             duration: options.duration,
@@ -647,7 +680,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: fadeIn, config: fadeInConfig};
+        return this;
 
     }
 
@@ -667,13 +700,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to fade out
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the fadeOut tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     fadeOut(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const fadeOutConfig = {
@@ -686,7 +720,7 @@ export default class phaserJuice {
 
         let options = this.options(fadeOutConfig, config);
        
-        let fadeOut = scene.tweens.add({
+        this.fadeOutTween = scene.tweens.add({
             targets: target,
             alpha: options.alpha,
             duration: options.duration,
@@ -707,7 +741,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: fadeOut, config: fadeOutConfig};
+        return this;
 
     }
 
@@ -729,13 +763,14 @@ export default class phaserJuice {
      * @param {object} target - sprite to fade in and out
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the fadeInOut tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     fadeInOut(target, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
         const fadeInOutConfig = {
@@ -750,7 +785,7 @@ export default class phaserJuice {
 
         let options = this.options(fadeInOutConfig, config);
 
-        let fadeInOut = scene.tweens.add({
+        this.fadeInOutTween = scene.tweens.add({
             targets: target,
             alpha: options.alpha,
             duration: options.duration,
@@ -773,7 +808,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: fadeInOut, config: fadeInOutConfig};
+        return this;
 
     }
 
@@ -795,13 +830,14 @@ export default class phaserJuice {
      * @param {boolean} [direction=true] - direction to flip the tween. True to flip, false to flip back
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the flipX tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     flipX(target, direction, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(direction === undefined || direction === null) {direction = true;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
@@ -822,7 +858,7 @@ export default class phaserJuice {
 
         let options = this.options(flipXConfig, config);
 
-        let flipX = scene.tweens.add({
+        this.flipXTween = scene.tweens.add({
             targets: target,
             scaleX: options.scaleX,
             duration: options.duration,
@@ -843,7 +879,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: flipX, config: flipXConfig};
+        return this;
 
     }
 
@@ -865,13 +901,14 @@ export default class phaserJuice {
      * @param {boolean} [direction=true] - direction to flip the tween. True to flip, false to flip back
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the flipY tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     flipY(target, direction, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(direction === undefined || direction === null) {direction = true;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
@@ -892,7 +929,7 @@ export default class phaserJuice {
 
         let options = this.options(flipYConfig, config);
 
-        let flipY = scene.tweens.add({
+        this.flipYTween = scene.tweens.add({
             targets: target,
             scaleY: options.scaleY,
             duration: options.duration,
@@ -913,7 +950,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: flipY, config: flipYConfig};
+        return this;
 
     }
 
@@ -937,13 +974,14 @@ export default class phaserJuice {
      * @param {boolean} [direction=true] - direction to spin the tween. True to spin right, false to spin back
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the spinX tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     spinX(target, direction, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(direction === undefined || direction === null) {direction = true;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
@@ -966,7 +1004,7 @@ export default class phaserJuice {
 
         let options = this.options(spinXConfig, config);
 
-        let spinX = scene.tweens.add({
+        this.spinXTween = scene.tweens.add({
             targets: target,
             scaleX: options.scaleX,
             yoyo: options.yoyo,
@@ -989,7 +1027,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: spinX, config: spinXConfig};
+        return this;
 
     }
 
@@ -1013,13 +1051,14 @@ export default class phaserJuice {
      * @param {boolean} [direction=true] - direction to spin the tween. True to spin right, false to spin back
      * @param {object} [config] - config to make edits to the effect
      * @param {boolean} [destroy=false] - destroy the tween when the onComplete event fires
-     * @return {object} Return an object with the spinY tween and the effect config
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     spinY(target, direction, config, destroy) {
         const scene = this.scene;
-
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
         if(direction === undefined || direction === null) {direction = true;}
         if(destroy === undefined || destroy === null) {destroy = false;}
 
@@ -1043,7 +1082,7 @@ export default class phaserJuice {
         let options = this.options(spinYConfig, config);
 
      
-        let spinY = scene.tweens.add({
+        this.spinYTween = scene.tweens.add({
             targets: target,
             scaleY: options.scaleY,
             yoyo: options.yoyo,
@@ -1066,7 +1105,7 @@ export default class phaserJuice {
             }
         });
 
-        return {tween: spinY, config: spinYConfig};
+        return this;
 
     }
 
@@ -1077,15 +1116,20 @@ export default class phaserJuice {
      * @method phaserJuice.reset
      * @type {function}
      * @param {object} target - sprite to reset
+     * @return {function} for method chaining
      * @since 1.0.0 
      */
 
     reset(target) {
+        // target is being chained
+        if(target === undefined || target === null) {target = this.target;}
 
         target.setAlpha(1);
         target.setScale(1);
         target.setAngle(0);
         target.setTint('0xffffff');
+
+        return this;
 
     }
 
