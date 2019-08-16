@@ -27,15 +27,14 @@ A plugin to create customizable juicy effects for sprites with Phaser 3
 
 ## Demo & Examples
 
-https://retrovx.github.io/phaser3Juice/
-
+https://retrovx.github.io/phaser3-juice-plugin/
 
 ## Getting Started
 
 ### Install
 
 ```
-git clone https://github.com/RetroVX/phaser3Juice.git
+git clone https://github.com/RetroVX/phaser3-juice-plugin.git
 ```
 Or download from Zip
 
