@@ -1,0 +1,25 @@
+{
+    "name": "phaser3-juice-plugin",
+    "version": "1.0.0",
+    "description": "A plugin to create customizable juicy effects for sprites with Phaser 3",
+    "main": "dist/phaserJuicePlugin.js",
+    "author": "RetroVX",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/skn3/phaser3-juice-plugin.git"
+    },
+    "keywords": [
+        "phaser",
+        "phaser3",
+        "phaser-plugin",
+        "phaser3-plugin"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/RetroVX/phaser3-juice-plugin",
+    "devDependencies": {
+        "phaser": "^3.19.0"
+    },
+    "peerDependencies": {
+        "phaser": "^3.19.0"
+    }
+}
