@@ -1,0 +1,7 @@
+{
+    "name": "phaser3-juice-plugin",
+    "version": "1.0",
+    "description": "A plugin to create customizable juicy effects for sprites with Phaser 3",
+    "main": "dist/phaserJuicePlugin.js",
+    "author": "RetroVX",
+}
